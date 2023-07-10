@@ -1,3 +1,5 @@
+require 'date'
+
 class Item
   attr_accessor :archived
 
@@ -8,7 +10,7 @@ class Item
     @source = source
     @label = label
     @publish_date = Date.parse(publish_date)
-    @archived = archived
+    @archived = false
   end
 
   def move_to_archive
