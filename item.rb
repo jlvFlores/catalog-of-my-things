@@ -3,7 +3,10 @@ class Item
 
   def initialize(genre)
     @id = id
+
     @genre = genre
+    genre.add_item(self)
+    
     @author = author
     @source = source
     @label = label

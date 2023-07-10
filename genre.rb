@@ -6,4 +6,8 @@ class Genre
     @name = name
     items = []
   end
+
+  add_item(item)
+    @items << item
+  end
 end
