@@ -1,11 +1,13 @@
 class Item
-  def initialize
-    @id = id
+  attr_accessor :archived
+
+  def initialize(genre, author, source, label, publish_date)
+    @id = Random.rand(1...1000)
     @genre = genre
     @author = author
     @source = source
     @label = label
-    @publish_date = publish_date
+    @publish_date = Date.parse(publish_date)
     @archived = archived
   end
 
@@ -16,8 +18,6 @@ class Item
   private
 
   def can_be_archived?
-    return true if @publish_date > 10
-
-    false
+    (Date.today - @publish_date).to_i > ( 10 * 365)
   end
 end
