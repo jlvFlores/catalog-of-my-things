@@ -1,8 +1,18 @@
 class Main
   def initialize
+    interface
+  end
+
+  def interface
     show_console_options
     option = get_user_input('Enter your choice: ').to_i
     select_option(option)
+    sleep(1)
+    if option == 13
+      exit
+    else 
+      interface
+    end
   end
 
   def show_console_options
@@ -21,52 +31,28 @@ class Main
     case option
     when 1
       puts 'future method 1'
-      sleep(1)
-      Main.new
     when 2
       puts 'future method 2'
-      sleep(1)
-      Main.new
     when 3
       puts 'future method 3'
-      sleep(1)
-      Main.new
     when 4
       puts 'future method 4'
-      sleep(1)
-      Main.new
     when 5
       puts 'future method 5'
-      sleep(1)
-      Main.new
     when 6
       puts 'future method 6'
-      sleep(1)
-      Main.new
     when 7
       puts 'future method 7'
-      sleep(1)
-      Main.new
     when 8
       puts 'future method 8'
-      sleep(1)
-      Main.new
     when 9
       puts 'future method 9'
-      sleep(1)
-      Main.new
     when 10
       puts 'future method 10'
-      sleep(1)
-      Main.new
     when 11
       puts 'future method 11'
-      sleep(1)
-      Main.new
     when 12
       puts 'future method 12'
-      sleep(1)
-      Main.new
     when 13
       puts 'Exit'
     else
