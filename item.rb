@@ -1,5 +1,7 @@
 class Item
-  def initialize
+  attr_accessor :genre
+
+  def initialize(genre)
     @id = id
     @genre = genre
     @author = author
