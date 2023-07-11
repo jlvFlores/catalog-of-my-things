@@ -3,8 +3,8 @@ require './music_album'
 require 'date'
 require 'pry'
 
-class MusicAlbumManager
-  attr_reader :music_albums
+class AlbumManager
+  attr_reader :music_albums, :genres
 
   def initialize(music_albums, genres)
     @music_albums = music_albums

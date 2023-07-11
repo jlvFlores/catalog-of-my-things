@@ -4,7 +4,7 @@ module Methods
   end
 
   def list_music_albums
-    @music_album_manager.list_music_albums
+    @album_manager.list_music_albums
   end
 
   def list_games
@@ -12,7 +12,7 @@ module Methods
   end
 
   def list_genres
-    @music_album_manager.list_genres
+    @album_manager.list_genres
   end
 
   def list_labels
@@ -28,7 +28,7 @@ module Methods
   end
 
   def add_music_album
-    @music_album_manager.add_music_album
+    @album_manager.add_music_album
   end
 
   def add_game
