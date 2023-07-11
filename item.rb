@@ -1,12 +1,26 @@
+require './genre'
+require 'date'
+
 class Item
-  def initialize
-    @id = id
-    @genre = genre
-    @author = author
-    @source = source
-    @label = label
-    @publish_date = publish_date
-    @archived = archived
+  attr_accessor :archived
+
+  def initialize(category, publish_date)
+    @id = Random.rand(1...1000)
+    @publish_date = Date.parse(publish_date)
+
+    case category
+    when Genre
+      @genre = category
+      category.add_item(self)
+    when Author
+      @author = category
+    when Source
+      @source = category
+    when Label
+      @label = category
+    end
+
+    @archived = false
   end
 
   def move_to_archive
@@ -16,8 +30,6 @@ class Item
   private
 
   def can_be_archived?
-    return true if @publish_date > 10
-
-    false
+    Date.today.year - @publish_date.year > 10
   end
 end
