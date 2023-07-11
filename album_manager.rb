@@ -1,7 +1,6 @@
 require './genre'
 require './music_album'
 require 'date'
-require 'pry'
 
 class AlbumManager
   attr_reader :music_albums, :genres
