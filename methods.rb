@@ -40,31 +40,30 @@ module Methods
   def load_child_and_category(child_file, category_file)
     child_file_location = File.join(Dir.pwd, 'JSON_files', child_file)
     category_file_location = File.join(Dir.pwd, 'JSON_files', category_file)
-    
+
     case [child_file, category_file]
     when ['albums.json', 'genres.json']
-      if File.empty?(child_file_location) || File.empty?(category_file_location)
-        return AlbumManager.new([], []) 
-      else
-        category_json_data = File.read(category_file_location)
-        child_json_data = File.read(child_file_location)
-        
-        genres_data = JSON.parse(category_json_data)
-        albums_data = JSON.parse(child_json_data)
+      return AlbumManager.new([], []) if File.empty?(child_file_location) || File.empty?(category_file_location)
 
-        genres = genres_data.map { |genre| Genre.new(genre['name']) }
+      category_json_data = File.read(category_file_location)
+      child_json_data = File.read(child_file_location)
 
-        music_albums = albums_data.map do |album| 
-          genre = genres.find { |genre| genre.name == album['genre']['name'] }
-          MusicAlbum.new(genre, album['publish_date'], album['on_spotify'])
-        end
-        
-        return AlbumManager.new(music_albums, genres) 
+      genres_data = JSON.parse(category_json_data)
+      albums_data = JSON.parse(child_json_data)
+
+      genres = genres_data.map { |genre| Genre.new(genre['name']) }
+
+      music_albums = albums_data.map do |album|
+        matching_genre = genres.find { |genre| genre.name == album['genre']['name'] }
+        MusicAlbum.new(matching_genre, album['publish_date'], album['on_spotify'])
       end
+
+      AlbumManager.new(music_albums, genres)
+
     # when ['books.json', 'labels.json']
-
+      # your code
     # when ['games.json', 'authors.json']
-
+      # your code
     else
       puts "Couldn't find either #{child_file} or #{category_file}"
       exit

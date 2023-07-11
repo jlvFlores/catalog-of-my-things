@@ -44,13 +44,11 @@ class AlbumManager
 
     begin
       date = Date.parse(input)
-      if date.strftime('%Y-%m-%d') == input
-        input
-      else
-        raise ArgumentError
-      end
+      raise ArgumentError unless date.strftime('%Y-%m-%d') == input
+
+      input
     rescue ArgumentError, TypeError
-      puts "Invalid date format. Please enter a date in the format yyyy-mm-dd."
+      puts 'Invalid date format. Please enter a date in the format yyyy-mm-dd.'
       get_user_input_date(prompt)
     end
   end
