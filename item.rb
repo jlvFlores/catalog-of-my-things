@@ -33,4 +33,3 @@ class Item
     Date.today.year - @publish_date.year > 10
   end
 end
-
