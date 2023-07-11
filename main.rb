@@ -18,7 +18,7 @@ class Main
     8 => 'add_music_album',
     9 => 'add_game',
     10 => 'exit_app'
-  }
+  }.freeze
 
   def interface
     show_console_options
