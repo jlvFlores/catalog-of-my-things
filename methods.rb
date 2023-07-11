@@ -4,7 +4,7 @@ module Methods
   end
 
   def list_music_albums
-    puts 'We are going to list the albums here'
+    @music_album_manager.list_music_albums
   end
 
   def list_games
@@ -12,7 +12,7 @@ module Methods
   end
 
   def list_genres
-    puts 'We are going to list the genres here'
+    @music_album_manager.list_genres
   end
 
   def list_labels
@@ -28,7 +28,7 @@ module Methods
   end
 
   def add_music_album
-    puts 'We are going to add an music album here'
+    @music_album_manager.add_music_album
   end
 
   def add_game

@@ -2,7 +2,7 @@ require './genre'
 require 'date'
 
 class Item
-  attr_accessor :archived
+  attr_reader :publish_date, :genre, :author, :label, :archived
 
   def initialize(category, publish_date)
     @id = Random.rand(1...1000)
@@ -14,8 +14,6 @@ class Item
       category.add_item(self)
     when Author
       @author = category
-    when Source
-      @source = category
     when Label
       @label = category
     end

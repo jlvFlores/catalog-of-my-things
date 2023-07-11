@@ -1,9 +1,11 @@
+require './music_album_manager'
 require './methods'
 
 class Main
   include Methods
 
   def initialize
+    @music_album_manager = MusicAlbumManager.new([], [])
     interface
   end
 
