@@ -21,19 +21,24 @@ describe Book do
   end
 
   describe '#can_be_archived?' do
-    it 'returns true if date is older than 10 years' do
-      book = Book.new(@publisher, @cover_state, '2009/1/1')
-      expect(book.can_be_archived?).to be_truthy
+    it 'returns true if date is older than 10 years and cover_state is bad' do
+      book = Book.new(@publisher, 'bad', '2009/1/1')
+      book.move_to_archive
       expect(book.archived).to be_truthy # Check archived instance variable
     end
-    it 'returns true if cover state is bad' do
+    it 'returns true if date is older than 10 years and cover_state is not bad' do
+      book = Book.new(@publisher, 'good', '2009/1/1')
+      book.move_to_archive
+      expect(book.archived).to be_truthy # Check archived instance variable
+    end
+    it 'returns true if date is not older than 10 years and cover_state is bad' do
       book = Book.new(@publisher, 'bad', '2021/1/1')
-      expect(book.can_be_archived?).to be_truthy
+      book.move_to_archive
       expect(book.archived).to be_truthy # Check archived instance variable
     end
     it 'returns false if date is not older than 10 years and cover_state is not bad' do
       book = Book.new(@publisher, 'good', '2021/1/1')
-      expect(book.can_be_archived?).to be_falsy
+      book.move_to_archive
       expect(book.archived).to be_falsy # Check archived instance variable
     end
   end
