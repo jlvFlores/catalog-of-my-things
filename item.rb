@@ -1,15 +1,25 @@
+require './genre'
 require 'date'
 
 class Item
   attr_accessor :archived
 
-  def initialize(genre, author, source, label, publish_date)
+  def initialize(category, publish_date)
     @id = Random.rand(1...1000)
-    @genre = genre
-    @author = author
-    @source = source
-    @label = label
     @publish_date = Date.parse(publish_date)
+
+    case category
+    when Genre
+      @genre = category
+      category.add_item(self)
+    when Author
+      @author = category
+    when Source
+      @source = category
+    when Label
+      @label = category
+    end
+
     @archived = false
   end
 
