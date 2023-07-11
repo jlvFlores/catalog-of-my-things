@@ -60,9 +60,9 @@ module Methods
 
       AlbumManager.new(music_albums, genres)
 
-    # when ['books.json', 'labels.json']
+      # when ['books.json', 'labels.json']
       # your code
-    # when ['games.json', 'authors.json']
+      # when ['games.json', 'authors.json']
       # your code
     else
       puts "Couldn't find either #{child_file} or #{category_file}"
