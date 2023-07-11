@@ -1,19 +1,16 @@
 require_relative '../item'
+require_relative '../book'
 
-describe Item do
-  context 'When publish-date is more than 10 years' do
-    it 'move to archive should change archived to true' do
-      book = Item.new('fantasy', 'j.k. rowling', 'amazon', 'scholastic', '1993-06-26')
-      book.move_to_archive
-      expect(book.archived).to eq(true)
+describe Book do
+  describe '#can_be_archived?' do
+    it 'returns true if cover state is bad' do
+      book = Book.new('param1', 'bad', 'param3')
+      expect(book.can_be_archived?).to be_truthy
     end
-  end
 
-  context 'When publish-date is less than 10 years' do
-    it 'move to archive should change archived to false' do
-      book2 = Item.new('fantasy', 'j.k. rowling', 'amazon', 'scholastic', '2019-06-26')
-      book2.move_to_archive
-      expect(book2.archived).to eq(false)
+    it 'returns false if cover state is not bad' do
+      book = Book.new('param1', 'good', 'param3')
+      expect(book.can_be_archived?).to be_falsy
     end
   end
 end
