@@ -1,22 +1,23 @@
+require './methods'
+
 class Main
+  include Methods
+
   def initialize
     interface
   end
 
   OPTIONS = {
-    1 => 'future method 1',
-    2 => 'future method 2',
-    3 => 'future method 3',
-    4 => 'future method 4',
-    5 => 'future method 5',
-    6 => 'future method 6',
-    7 => 'future method 7',
-    8 => 'future method 8',
-    9 => 'future method 9',
-    10 => 'future method 10',
-    11 => 'future method 11',
-    12 => 'future method 12',
-    13 => 'Exit'
+    1 => 'list_books',
+    2 => 'list_music_albums',
+    3 => 'list_games',
+    4 => 'list_genres',
+    5 => 'list_labels',
+    6 => 'list_authors',
+    7 => 'add_book',
+    8 => 'add_music_album',
+    9 => 'add_game',
+    10 => 'exit_app'
   }.freeze
 
   def interface
@@ -30,9 +31,9 @@ class Main
     puts "\nWelcome to the Ruby Console App!"
     puts "\nPlease choose an option from the list below:"
     puts '-------------------------------------------'
-    options_array = ['List all books', 'List all music albums', 'List all movies', 'List all games', 'List all genres',
-                     'List all labels', 'List all authors', 'List all sources', 'Add book', 'Add a music album',
-                     'Add movie', 'Add a game', 'Exit']
+    options_array = ['List all books', 'List all music albums', 'List all games', 'List all genres',
+                     'List all labels', 'List all authors', 'Add book', 'Add a music album', 'Add a game',
+                     'Exit']
     options_array.each_with_index do |option, index|
       puts "#{index + 1}. #{option}"
     end
@@ -40,8 +41,7 @@ class Main
 
   def select_option(option)
     if OPTIONS.key?(option)
-      puts OPTIONS[option]
-      exit if option == 13 # Exit if option is 13
+      send OPTIONS[option]
     else
       puts '-------------------------------------------'
       puts "\nInvalid option, try again!"
