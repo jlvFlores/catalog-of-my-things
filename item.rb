@@ -1,25 +1,14 @@
 require './genre'
+require './label'
 require 'date'
 
 class Item
-  attr_accessor :archived
+  attr_reader :archived, :label, :genre, :author, :source, :id
 
-  def initialize(category, publish_date)
+  def initialize(publish_date)
     @id = Random.rand(1...1000)
-    @publish_date = Date.parse(publish_date)
-
-    case category
-    when Genre
-      @genre = category
-      category.add_item(self)
-    when Author
-      @author = category
-    when Source
-      @source = category
-    when Label
-      @label = category
-    end
-
+    @publish_date = publish_date.nil? ? nil : Date.parse(publish_date)
+    @label = nil
     @archived = false
   end
 
@@ -27,7 +16,9 @@ class Item
     @archived = can_be_archived?
   end
 
-  private
+  def add_label(label)
+    @label = label
+  end
 
   def can_be_archived?
     Date.today.year - @publish_date.year > 10

@@ -1,0 +1,14 @@
+[
+  "#<Book:0x000001af8dc6fb40>",
+  "#<Book:0x000001af8dc6f9b0>",
+  "#<Book:0x000001af8dc6f960>",
+  "#<Book:0x000001af8dc6f910>",
+  "#<Book:0x000001af8dc6f8c0>",
+  {
+    "id": 110,
+    "title": "All me",
+    "publisher": "Cisco",
+    "cover_state": "good",
+    "publish_date": "2020-12-12"
+  }
+]

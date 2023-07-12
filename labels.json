@@ -1,0 +1,21 @@
+[
+    {
+      "title": "Religion",
+      "color": "White"
+    },
+    {
+
+      "title": "Adventure",
+      "color": "Green"
+    },
+    {
+
+      "title": "Horror",
+      "color": "Violet"
+    },
+    {
+
+      "title":  "Romance",
+      "color": "Red"
+    }
+  ]
