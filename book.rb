@@ -1,13 +1,12 @@
 require_relative 'item'
+require './label'
 
 class Book < Item
   attr_accessor :cover_state
-  attr_reader :title, :publisher, :publish_date, :id
+  attr_reader :publisher, :publish_date, :id
 
-  def initialize(title, publisher, cover_state, publish_date)
-    super(publish_date)
-    @id = Random.rand(1..1000)
-    @title = title
+  def initialize(label, publisher, cover_state, publish_date)
+    super(label, publish_date)
     @publisher = publisher
     @cover_state = cover_state
   end
@@ -19,7 +18,7 @@ class Book < Item
   def to_hash
     {
       id: @id,
-      title: @title,
+      label: @label.to_hash,
       publisher: @publisher,
       cover_state: @cover_state,
       publish_date: @publish_date
