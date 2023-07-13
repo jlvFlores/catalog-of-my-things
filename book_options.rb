@@ -31,6 +31,7 @@ class BookOptions
       puts '||                                                                  ||'
       puts '======================================================================'
     else
+      puts "There are #{book_ruby_objects.length} books:"
       @book_ruby_objects.each_with_index do |book, i|
         id = book.id
         title = book.title
@@ -62,7 +63,7 @@ class BookOptions
     publish_date = gets.chomp
     new_book = Book.new(title, publisher, cover_state, publish_date)
     @book_instances << new_book
-    @book_ruby_objects.push(to_ruby_object(new_book))
+    @book_ruby_objects.push((new_book))
     label_options.add_label(new_book)
     sleep(0.3)
     puts "\n======================================================================"

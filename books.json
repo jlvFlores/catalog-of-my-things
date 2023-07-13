@@ -1,14 +1,1 @@
-[
-  "#<Book:0x000001af8dc6fb40>",
-  "#<Book:0x000001af8dc6f9b0>",
-  "#<Book:0x000001af8dc6f960>",
-  "#<Book:0x000001af8dc6f910>",
-  "#<Book:0x000001af8dc6f8c0>",
-  {
-    "id": 110,
-    "title": "All me",
-    "publisher": "Cisco",
-    "cover_state": "good",
-    "publish_date": "2020-12-12"
-  }
-]
+[{"id":982,"title":"Book of You and I","publisher":"Cisco","cover_state":"good","publish_date":"2000-02-13"},{"id":186,"title":"Wildlife Photography","publisher":"Nat Geo Wild","cover_state":"good","publish_date":"2022-12-15"},{"id":676,"title":"Living Alone","publisher":"Ghost","cover_state":"good","publish_date":"2000-02-13"},{"id":665,"title":"All me","publisher":"Cisco","cover_state":"good","publish_date":"2020-12-12"},{"id":165,"title":"Hiking","publisher":"Witcher","cover_state":"good","publish_date":"2020-12-12"}]
