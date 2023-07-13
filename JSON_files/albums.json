@@ -1,2 +1,1 @@
-[]
-
+[{"id":771,"publish_date":"2000-12-12","genre":{"id":732,"name":"Pop","items":["#<MusicAlbum:0x00000253d17b58c8>","#<MusicAlbum:0x00000253d17b56e8>"]},"on_spotify":false},{"id":521,"publish_date":"2000-12-12","genre":{"id":798,"name":"Rock","items":["#<MusicAlbum:0x00000253d17b5878>"]},"on_spotify":true},{"id":576,"publish_date":"2020-12-12","genre":{"id":732,"name":"Pop","items":["#<MusicAlbum:0x00000253d17b58c8>","#<MusicAlbum:0x00000253d17b56e8>"]},"on_spotify":false}]
