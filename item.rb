@@ -5,10 +5,20 @@ require 'date'
 class Item
   attr_reader :archived, :label, :genre, :author, :source, :id
 
-  def initialize(publish_date)
+  def initialize(category, publish_date)
     @id = Random.rand(1...1000)
-    @publish_date = publish_date.nil? ? nil : Date.parse(publish_date)
+    @publish_date = Date.parse(publish_date)
     @label = nil
+    case category
+    when Genre
+      @genre = category
+      category.add_item(self)
+    # when Author
+    #   @author = category
+    when Label
+      @label = category
+    end
+
     @archived = false
   end
 

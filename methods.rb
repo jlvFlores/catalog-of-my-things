@@ -7,7 +7,7 @@ module Methods
   end
 
   def list_music_albums
-    puts 'We are going to list the albums here'
+    @album_manager.list_music_albums
   end
 
   def list_games
@@ -15,12 +15,12 @@ module Methods
   end
 
   def list_genres
-    puts 'We are going to list the genres here'
+    @album_manager.list_genres
   end
 
   def list_labels
     puts 'We are going to list the labels here'
-    @label_options.list_labels
+    @book_options.list_labels
   end
 
   def list_authors
@@ -29,11 +29,11 @@ module Methods
 
   def add_book
     puts 'We are going to add a book here'
-    @book_options.add_book(@label_options)
+    @book_options.add_book
   end
 
   def add_music_album
-    puts 'We are going to add a music album here'
+    @album_manager.add_music_album
   end
 
   def add_game
@@ -64,7 +64,7 @@ module Methods
       AlbumManager.new(music_albums, genres)
 
     when ['books.json', 'labels.json']
-      return BookManager.new([], []) if File.empty?(child_file_location) || File.empty?(category_file_location)
+      return BookOptions.new([], []) if File.empty?(child_file_location) || File.empty?(category_file_location)
 
       labels_json_data = File.read(category_file_location)
       books_json_data = File.read(child_file_location)
@@ -76,22 +76,29 @@ module Methods
 
       books = books_data.map do |book|
         matching_label = labels.find { |label| label.title == book['label']['title'] }
-        Book.new(book['name'], book['publisher'], book['publish_date'], matching_label)
+        Book.new(matching_label, book['publisher'], book['cover_state'], book['publish_date'])
       end
 
-      BookManager.new(books, labels)
+      BookOptions.new(books, labels)
+
+    else
+      puts "Couldn't find either #{child_file} or #{category_file}"
+      exit
     end
   end
 
   def save_data_to_file(data, file_name)
-    file_location = File.join(File.dirname(__FILE__), file_name)
+    file_location = File.join(Dir.pwd, 'JSON_files', file_name)
     json_data = JSON.generate(data.map(&:to_hash))
     File.write(file_location, json_data)
   end
 
   def exit_app
+    save_data_to_file(@album_manager.music_albums, 'albums.json')
+    save_data_to_file(@album_manager.genres, 'genres.json')
+    save_data_to_file(@book_options.book_instances, 'books.json')
+    save_data_to_file(@book_options.labels, 'labels.json')
     puts 'Thank you for using our app'
-    save_data_to_file(@book_options.book_ruby_objects, 'books.json') # Update this line
     exit
   end
 end

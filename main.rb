@@ -1,23 +1,16 @@
 require_relative 'book_options'
-require_relative 'label_options'
+require_relative 'label'
 require_relative 'methods'
 require_relative 'storage'
+require './album_manager'
 
 class Main
   include Methods
   attr_accessor :items, :labels
 
   def initialize
-    @storage = Storage.new('', '')
-    @book_options = BookOptions.new
-    @label_options = LabelOptions.new
-    @book_options.book_ruby_objects = @storage.load_data('books.json').map do |book_data|
-      Book.new(book_data['title'], book_data['publisher'], book_data['cover_state'], book_data['publish_date'])
-    end
-    @label_options.label_ruby_objects = @storage.load_data('labels.json').map do |label_data|
-      Label.new(label_data['title'], label_data['color'])
-    end
-    @label_options.fill_labels_instances_list
+    @book_options = load_child_and_category('books.json', 'labels.json')
+    @album_manager = load_child_and_category('albums.json', 'genres.json')
     interface
   end
 
@@ -39,11 +32,6 @@ class Main
     option = get_user_input('Enter your choice: ').to_i
     select_option(option)
     interface
-  end
-
-  def save_data
-    @storage.save_data('books.json', @book_options.book_ruby_objects)
-    @storage.save_data('labels.json', @label_options.label_ruby_objects)
   end
 
   def show_console_options
