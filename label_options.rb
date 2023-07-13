@@ -20,9 +20,9 @@ class LabelOptions
 
   def to_ruby_object(label)
     {
-      'id' => label.id,
-      'title' => label.title,
-      'color' => label.color
+      id: label.id,
+      title: label.title,
+      color: label.color
     }
   end
 
@@ -41,6 +41,10 @@ class LabelOptions
       puts "There are #{label_ruby_objects.length} labels:"
       puts ''
       @label_ruby_objects.each_with_index do |label, index|
+        title = label.title
+        color =label.color
+
+
         puts "[#{index + 1}] #{label.title} #{label.color}"
       end
       puts ''
@@ -56,16 +60,17 @@ class LabelOptions
     puts "\nPlease, select a label 📖: "
     puts ''
     @label_ruby_objects.each_with_index do |label_hash, index|
-      label = Label.new(label_hash.title, label_hash.color)
+      label = Label.new(label_hash[:title], label_hash[:color])
       puts "[#{index + 1}] #{label.title} #{label.color}"
     end
     puts ''
     print 'Please, choose a label by number: '
     label_index = gets.chomp.to_i
     label_hash = @label_ruby_objects[label_index - 1]
-    label = Label.new(label_hash.title, label_hash.color)
+    label = Label.new(label_hash[:title], label_hash[:color])
     label.add_item(item)
   end
+
 
   def add_label(item)
     puts "\nHow do you want to add a label?"
@@ -98,12 +103,5 @@ class LabelOptions
       @label_ruby_objects << to_ruby_object(label)
       label.add_item(item)
     end
-  end
-  save_data_to_file(@label_ruby_objects, 'labels.json')
-
-  def save_data_to_file(data, file_name)
-    file_location = File.join(Dir.pwd, file_name)
-    json_data = JSON.pretty_generate(data)
-    File.write(file_location, json_data)
   end
 end
