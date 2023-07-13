@@ -40,3 +40,4 @@ CREATE TABLE items_labels (
   item_id INT REFERENCES items (id),
   label_id INT REFERENCES labels (id)
 )
+

@@ -15,6 +15,7 @@ class Item
       category.add_item(self)
     # when Author
     #   @author = category
+
     when Label
       @label = category
     end
