@@ -4,7 +4,6 @@ require_relative 'methods'
 require_relative 'storage'
 require './album_manager'
 
-
 class Main
   include Methods
   attr_accessor :items, :labels

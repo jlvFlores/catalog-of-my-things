@@ -30,8 +30,7 @@ class BookOptions
         cover_state = book.cover_state
         publish_date = book.publish_date
 
-        puts "[#{i}] ID: #{id} - Label: #{label} Publisher: #{publisher} - Cover State: #{cover_state}" \
-             " - Publish Date: #{publish_date}"
+        puts "[#{i}] ID: #{id} - Label: #{label} Publisher: #{publisher} - Cover State: #{cover_state} - Publish Date: #{publish_date}"
       end
       puts "\n======================================================================"
     end
