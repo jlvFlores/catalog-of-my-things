@@ -90,7 +90,7 @@ class BookOptions
       puts "There are #{@labels.length} labels:"
       puts ''
       @labels.each_with_index do |label, index|
-        puts "[#{index + 1}] #{label.title} #{label.color}"
+        puts "[#{index + 1}] #{label.title} (#{label.color})"
       end
       puts ''
     end

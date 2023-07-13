@@ -3,7 +3,7 @@ require './label'
 require 'date'
 
 class Item
-  attr_reader :archived, :label, :genre, :author, :source, :id
+  attr_reader :archived, :label, :genre, :author, :source, :id, :publish_date
 
   def initialize(category, publish_date)
     @id = Random.rand(1...1000)
