@@ -1,9 +1,11 @@
+require './album_manager'
 require './methods'
 
 class Main
   include Methods
 
   def initialize
+    @album_manager = load_child_and_category('albums.json', 'genres.json')
     interface
   end
 
