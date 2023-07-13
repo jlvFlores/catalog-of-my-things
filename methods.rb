@@ -46,45 +46,57 @@ module Methods
 
     case [child_file, category_file]
     when ['albums.json', 'genres.json']
-      return AlbumManager.new([], []) if File.empty?(child_file_location) || File.empty?(category_file_location)
-
-      category_json_data = File.read(category_file_location)
-      child_json_data = File.read(child_file_location)
-
-      genres_data = JSON.parse(category_json_data)
-      albums_data = JSON.parse(child_json_data)
-
-      genres = genres_data.map { |genre| Genre.new(genre['name']) }
-
-      music_albums = albums_data.map do |album|
-        matching_genre = genres.find { |genre| genre.name == album['genre']['name'] }
-        MusicAlbum.new(matching_genre, album['publish_date'], album['on_spotify'])
-      end
-
-      AlbumManager.new(music_albums, genres)
+      load_album_manager(child_file_location, category_file_location)
 
     when ['books.json', 'labels.json']
-      return BookOptions.new([], []) if File.empty?(child_file_location) || File.empty?(category_file_location)
-
-      labels_json_data = File.read(category_file_location)
-      books_json_data = File.read(child_file_location)
-
-      labels_data = JSON.parse(labels_json_data)
-      books_data = JSON.parse(books_json_data)
-
-      labels = labels_data.map { |label| Label.new(label['title'], label['color']) }
-
-      books = books_data.map do |book|
-        matching_label = labels.find { |label| label.title == book['label']['title'] }
-        Book.new(matching_label, book['publisher'], book['cover_state'], book['publish_date'])
-      end
-
-      BookOptions.new(books, labels)
+      load_book_options(child_file_location, category_file_location)
 
     else
       puts "Couldn't find either #{child_file} or #{category_file}"
       exit
     end
+  end
+
+  def load_album_manager(album_file_location, genre_file_location)
+    return AlbumManager.new([], []) if empty_file?(album_file_location) || empty_file?(genre_file_location)
+
+    genre_json_data = File.read(genre_file_location)
+    album_json_data = File.read(album_file_location)
+
+    genres_data = JSON.parse(genre_json_data)
+    albums_data = JSON.parse(album_json_data)
+
+    genres = genres_data.map { |genre| Genre.new(genre['name']) }
+
+    music_albums = albums_data.map do |album|
+      matching_genre = genres.find { |genre| genre.name == album['genre']['name'] }
+      MusicAlbum.new(matching_genre, album['publish_date'], album['on_spotify'])
+    end
+
+    AlbumManager.new(music_albums, genres)
+  end
+
+  def load_book_options(book_file_location, label_file_location)
+    return BookOptions.new([], []) if empty_file?(book_file_location) || empty_file?(label_file_location)
+
+    label_json_data = File.read(label_file_location)
+    book_json_data = File.read(book_file_location)
+
+    labels_data = JSON.parse(label_json_data)
+    books_data = JSON.parse(book_json_data)
+
+    labels = labels_data.map { |label| Label.new(label['title'], label['color']) }
+
+    books = books_data.map do |book|
+      matching_label = labels.find { |label| label.title == book['label']['title'] }
+      Book.new(matching_label, book['publisher'], book['cover_state'], book['publish_date'])
+    end
+
+    BookOptions.new(books, labels)
+  end
+
+  def empty_file?(file_location)
+    File.size?(file_location).nil?
   end
 
   def save_data_to_file(data, file_name)
