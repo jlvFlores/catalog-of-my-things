@@ -9,9 +9,9 @@ class Main
   attr_accessor :items, :labels
 
   def initialize
-    @book_options  = load_child_and_category('books.json',  'labels.json')
+    @book_options = load_child_and_category('books.json', 'labels.json')
     @album_manager = load_child_and_category('albums.json', 'genres.json')
-    @game_manager  = load_child_and_category('games.json',  'authors.json')
+    @game_manager = load_child_and_category('games.json', 'authors.json')
     interface
   end
 

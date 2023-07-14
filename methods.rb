@@ -69,11 +69,8 @@ module Methods
   def load_album_manager(album_file_location, genre_file_location)
     return AlbumManager.new([], []) if empty_file?(album_file_location) || empty_file?(genre_file_location)
 
-    genre_json_data = File.read(genre_file_location)
-    album_json_data = File.read(album_file_location)
-
-    genres_data = JSON.parse(genre_json_data)
-    albums_data = JSON.parse(album_json_data)
+    albums_data = parse_data(album_file_location)
+    genres_data = parse_data(genre_file_location)
 
     genres = genres_data.map { |genre| Genre.new(genre['name']) }
 
@@ -88,11 +85,8 @@ module Methods
   def load_book_options(book_file_location, label_file_location)
     return BookOptions.new([], []) if empty_file?(book_file_location) || empty_file?(label_file_location)
 
-    label_json_data = File.read(label_file_location)
-    book_json_data = File.read(book_file_location)
-
-    labels_data = JSON.parse(label_json_data)
-    books_data = JSON.parse(book_json_data)
+    books_data = parse_data(book_file_location)
+    labels_data = parse_data(label_file_location)
 
     labels = labels_data.map { |label| Label.new(label['title'], label['color']) }
 

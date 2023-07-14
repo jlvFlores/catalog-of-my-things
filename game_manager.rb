@@ -26,9 +26,9 @@ class GameManager
 
   def add_game
     puts "What is the game author's first name?"
-    author_first_name = get_user_input("First name: ").capitalize
+    author_first_name = get_user_input('First name: ').capitalize
     puts "What is the game author's last name?"
-    author_last_name = get_user_input("Last name: ").capitalize
+    author_last_name = get_user_input('Last name: ').capitalize
     matching_author = @authors.find { |author| author.first_name == author_first_name && author.last_name == author_last_name }
     if matching_author
       author = matching_author
@@ -36,9 +36,9 @@ class GameManager
       author = Author.new(author_first_name, author_last_name)
       @authors << author
     end
-    puts "When was the last time you played this game?"
+    puts 'When was the last time you played this game?'
     last_played_at = get_user_input_date('Date (yyyy-mm-dd): ')
-    puts "When was it published?"
+    puts 'When was it published?'
     publish_date = get_user_input_date('Publish date (yyyy-mm-dd): ')
     multiplayer = get_user_input_bool('Is it on multiplayer? ')
     game = Game.new(author, publish_date, multiplayer, last_played_at) # Class, 'yyyy-mm-dd', true or false, 'yyyy-mm-dd'
