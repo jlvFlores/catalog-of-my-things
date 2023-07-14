@@ -1,13 +1,14 @@
-require_relative '../book'
+require './book'
 
 describe Book do
   before :each do
+    @label = Label.new('title', 'color')
     @publisher = 'publisher'
     @cover_state = 'cover_state'
-    @book = Book.new(@publisher, @cover_state, '2022/2/3')
+    @book = Book.new(@label, @publisher, @cover_state, '2022/2/3')
   end
 
-  describe '#new' do
+  context '#new' do
     it 'will create a new book' do
       expect(@book).to be_instance_of(Book)
     end
@@ -20,24 +21,24 @@ describe Book do
     end
   end
 
-  describe '#can_be_archived?' do
+  context '#can_be_archived?' do
     it 'returns true if date is older than 10 years and cover_state is bad' do
-      book = Book.new(@publisher, 'bad', '2009/1/1')
+      book = Book.new(@label, @publisher, 'bad', '2009/1/1')
       book.move_to_archive
       expect(book.archived).to be_truthy # Check archived instance variable
     end
     it 'returns true if date is older than 10 years and cover_state is not bad' do
-      book = Book.new(@publisher, 'good', '2009/1/1')
+      book = Book.new(@label, @publisher, 'good', '2009/1/1')
       book.move_to_archive
       expect(book.archived).to be_truthy # Check archived instance variable
     end
     it 'returns true if date is not older than 10 years and cover_state is bad' do
-      book = Book.new(@publisher, 'bad', '2021/1/1')
+      book = Book.new(@label, @publisher, 'bad', '2021/1/1')
       book.move_to_archive
       expect(book.archived).to be_truthy # Check archived instance variable
     end
     it 'returns false if date is not older than 10 years and cover_state is not bad' do
-      book = Book.new(@publisher, 'good', '2021/1/1')
+      book = Book.new(@label, @publisher, 'good', '2021/1/1')
       book.move_to_archive
       expect(book.archived).to be_falsy # Check archived instance variable
     end

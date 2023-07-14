@@ -1,8 +1,8 @@
 require_relative 'book_options'
 require_relative 'label'
 require_relative 'methods'
-require_relative 'storage'
 require './album_manager'
+require './game_manager'
 
 class Main
   include Methods
@@ -11,6 +11,7 @@ class Main
   def initialize
     @book_options = load_child_and_category('books.json', 'labels.json')
     @album_manager = load_child_and_category('albums.json', 'genres.json')
+    @game_manager = load_child_and_category('games.json', 'authors.json')
     interface
   end
 

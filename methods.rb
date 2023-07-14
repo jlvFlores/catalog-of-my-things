@@ -2,7 +2,6 @@ require 'json'
 
 module Methods
   def list_books
-    puts 'We are going to list the books here'
     @book_options.list_books
   end
 
@@ -11,7 +10,7 @@ module Methods
   end
 
   def list_games
-    puts 'We are going to list the games here'
+    @game_manager.list_games
   end
 
   def list_genres
@@ -19,16 +18,14 @@ module Methods
   end
 
   def list_labels
-    puts 'We are going to list the labels here'
     @book_options.list_labels
   end
 
   def list_authors
-    puts 'We are going to list the authors here'
+    @game_manager.list_authors
   end
 
   def add_book
-    puts 'We are going to add a book here'
     @book_options.add_book
   end
 
@@ -37,7 +34,16 @@ module Methods
   end
 
   def add_game
-    puts 'We are going to add a game here'
+    @game_manager.add_game
+  end
+
+  def empty_file?(file_location)
+    File.size?(file_location).nil?
+  end
+
+  def parse_data(file)
+    json_data = File.read(file)
+    JSON.parse(json_data)
   end
 
   def load_child_and_category(child_file, category_file)
@@ -51,6 +57,9 @@ module Methods
     when ['books.json', 'labels.json']
       load_book_options(child_file_location, category_file_location)
 
+    when ['games.json', 'authors.json']
+      load_game_manager(child_file_location, category_file_location)
+
     else
       puts "Couldn't find either #{child_file} or #{category_file}"
       exit
@@ -60,11 +69,8 @@ module Methods
   def load_album_manager(album_file_location, genre_file_location)
     return AlbumManager.new([], []) if empty_file?(album_file_location) || empty_file?(genre_file_location)
 
-    genre_json_data = File.read(genre_file_location)
-    album_json_data = File.read(album_file_location)
-
-    genres_data = JSON.parse(genre_json_data)
-    albums_data = JSON.parse(album_json_data)
+    albums_data = parse_data(album_file_location)
+    genres_data = parse_data(genre_file_location)
 
     genres = genres_data.map { |genre| Genre.new(genre['name']) }
 
@@ -79,11 +85,8 @@ module Methods
   def load_book_options(book_file_location, label_file_location)
     return BookOptions.new([], []) if empty_file?(book_file_location) || empty_file?(label_file_location)
 
-    label_json_data = File.read(label_file_location)
-    book_json_data = File.read(book_file_location)
-
-    labels_data = JSON.parse(label_json_data)
-    books_data = JSON.parse(book_json_data)
+    books_data = parse_data(book_file_location)
+    labels_data = parse_data(label_file_location)
 
     labels = labels_data.map { |label| Label.new(label['title'], label['color']) }
 
@@ -95,8 +98,20 @@ module Methods
     BookOptions.new(books, labels)
   end
 
-  def empty_file?(file_location)
-    File.size?(file_location).nil?
+  def load_game_manager(game_file_location, author_file_location)
+    return GameManager.new([], []) if empty_file?(game_file_location) || empty_file?(author_file_location)
+
+    games_data = parse_data(game_file_location)
+    authors_data = parse_data(author_file_location)
+
+    authors = authors_data.map { |author| Author.new(author['first_name'], author['last_name']) }
+
+    games = games_data.map do |game|
+      matching_author = authors.find { |author| author.first_name == game['author']['first_name'] && author.last_name == game['author']['last_name'] }
+      Game.new(matching_author, game['publish_date'], game['multiplayer'], game['last_played_at'])
+    end
+
+    GameManager.new(games, authors)
   end
 
   def save_data_to_file(data, file_name)
@@ -106,10 +121,12 @@ module Methods
   end
 
   def exit_app
-    save_data_to_file(@album_manager.music_albums, 'albums.json')
-    save_data_to_file(@album_manager.genres, 'genres.json')
     save_data_to_file(@book_options.book_instances, 'books.json')
     save_data_to_file(@book_options.labels, 'labels.json')
+    save_data_to_file(@album_manager.music_albums, 'albums.json')
+    save_data_to_file(@album_manager.genres, 'genres.json')
+    save_data_to_file(@game_manager.games, 'games.json')
+    save_data_to_file(@game_manager.authors, 'authors.json')
     puts 'Thank you for using our app'
     exit
   end

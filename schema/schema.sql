@@ -1,43 +1,61 @@
-DROP TABLE IF EXISTS Item;
-DROP TABLE IF EXISTS Genre;
-DROP TABLE IF EXISTS Albums;
+DROP TABLE IF EXISTS Items;
 
-CREATE TABLE Item (
+DROP TABLE IF EXISTS Genres;
+DROP TABLE IF EXISTS Labels;
+DROP TABLE IF EXISTS Authors;
+
+DROP TABLE IF EXISTS Albums;
+DROP TABLE IF EXISTS Books;
+DROP TABLE IF EXISTS Games;
+
+CREATE TABLE Items (
   id INT GENERATED ALWAYS AS IDENTITY,
-  archived BOOLEAN,
+  archived BOOLEAN NOT NULL,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE Genre (
+CREATE TABLE Genres (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(50)
+  name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Albums (
   id INT PRIMARY KEY,
-  genre_id INT,
-  publish_date DATE,
-  on_spotify BOOLEAN,
+  genre_id INT NOT NULL,
+  publish_date DATE NOT NULL,
+  on_spotify BOOLEAN NOT NULL,
   FOREIGN KEY (id) REFERENCES Item(id),
-  FOREIGN KEY (genre_id) REFERENCES Genre(id)
+  FOREIGN KEY (genre_id) REFERENCES Genres(id)
 );
 
-CREATE TABLE books (
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  item_id INT REFERENCES items (id),
-  publisher VARCHAR(60) NOT NULL,
-  cover_state VARCHAR(60) NOT NULL
-)
-
-CREATE TABLE labels (
+CREATE TABLE Labels (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR(60) NOT NULL,
   color VARCHAR(60) NOT NULL
 )
 
-CREATE TABLE items_labels (
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  item_id INT REFERENCES items (id),
-  label_id INT REFERENCES labels (id)
+CREATE TABLE Books (
+  id INT PRIMARY KEY,
+  label_id INT NOT NULL,
+  publisher VARCHAR(60) NOT NULL,
+  cover_state VARCHAR(60) NOT NULL,
+  publish_date DATE NOT NULL,
+  FOREIGN KEY (id) REFERENCES Item(id),
+  FOREIGN KEY (label_id) REFERENCES Labels(id)
 )
 
+CREATE TABLE Authors (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL
+  last_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Games (
+  id INT PRIMARY KEY,
+  author_id INT NOT NULL,
+  publish_date DATE NOT NULL,
+  multiplayer BOOLEAN NOT NULL,
+  last_played_at DATE NOT NULL,
+  FOREIGN KEY (id) REFERENCES Item(id),
+  FOREIGN KEY (author_id) REFERENCES Authors(id)
+);
