@@ -17,9 +17,9 @@ In this project, we will create a console app that will help a user keep a recor
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
 - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
+  - [Setup](#setup)
   - [Usage](#usage)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
@@ -52,6 +52,9 @@ In this project, we will create a console app that will help a user keep a recor
 
 > Key features of the repository.
 
+- **List options for Games, Books, Albums, Genres, Authors and Labels***
+- **Options to add new Games, Books or Albums***
+- **Methods to store and get data from json file**
 - **Has Rubocop to enforce best ruby practices**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -66,7 +69,7 @@ Follow these steps in order to run ruby code.
 
 First you need to ensure that you have ruby installed in your computer. 
 
-### Setup
+### Install
 
 It varies depending on your operating system so here are some links to help you install it on [Windows](https://gorails.com/setup/windows/10) and on [Ubuntu](https://www.ruby-lang.org/en/documentation/installation/#apt). 
 
@@ -86,21 +89,29 @@ For MacOS run the following commands
 
 This example shows how to install Ruby 3.0.1 which was the latest version in April 2021, but you can check to see if there is a newer version [here](https://www.ruby-lang.org/en/downloads/releases/). Iy is also assumed that you have [homebrew](https://brew.sh/) already installed on your Mac.
 
+### Setup
+
+Once you have ruby installed, run this command to get the project on your local machine.
+
+```sh
+  git clone git@github.com:jlvFlores/catalog-of-my-things.git
+```
+
 ### Usage
 
-Once you have ruby installed, run this command to start writing in ruby.
+Once you have the project installed, access the project's root directory usign this command 
 
 ```sh
-  irb
+  cd catalog-of-my-things
 ```
 
-You can also use VSCode by writing `code .` on the terminal and accepting all the prompts given.
+And lastly, run this command to see the project in action.
 
 ```sh
-code file_name
-  # or
-code .
+  ruby main.rb
 ```
+
+Here is a brief [video](https://drive.google.com/file/d/1O0AY-0lq8AWu-bSShIZdy_u0z9KYdzfQ/view?usp=sharing) explaining the project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -116,7 +127,7 @@ code .
 - Twitter: [@JoseVaz44312762](https://twitter.com/JoseVaz44312762)
 - LinkedIn: [Jose (Luis) Vazquez](https://www.linkedin.com/in/jose-luis-vazquez/)
 
-👤 **Author 1**
+👤 **Author 2**
 
 - GitHub: [@Cisco-the-wayword](https://github.com/Cisco-the-wayword)
 - Twitter: [@the_wayword1](https://twitter.com/the_wayword1)
@@ -130,8 +141,6 @@ code .
 
 > The following are the future features that will be added to the project.
 
-- [ ] **It will preserve data in JSON files**
-- [ ] **It will Display a list of books, music albums, movies, etc**
 - [ ] **It will probably not take over the world**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
