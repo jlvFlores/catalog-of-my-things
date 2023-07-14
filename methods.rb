@@ -2,7 +2,6 @@ require 'json'
 
 module Methods
   def list_books
-    puts 'We are going to list the books here'
     @book_options.list_books
   end
 
@@ -11,7 +10,7 @@ module Methods
   end
 
   def list_games
-    puts 'We are going to list the games here'
+    @game_manager.list_games
   end
 
   def list_genres
@@ -19,16 +18,14 @@ module Methods
   end
 
   def list_labels
-    puts 'We are going to list the labels here'
     @book_options.list_labels
   end
 
   def list_authors
-    puts 'We are going to list the authors here'
+    @game_manager.list_authors
   end
 
   def add_book
-    puts 'We are going to add a book here'
     @book_options.add_book
   end
 
@@ -37,7 +34,7 @@ module Methods
   end
 
   def add_game
-    puts 'We are going to add a game here'
+    @game_manager.add_game
   end
 
   def load_child_and_category(child_file, category_file)
