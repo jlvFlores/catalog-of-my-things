@@ -33,7 +33,8 @@ In this project, we will create a console app that will help a user keep a recor
 
 # 📖 OOP-school-library <a name="about-project"></a>
 
-**Catalog of my things** is a simple console app that allows users to manage collections of the things they own.
+**Catalog of my things** is a simple console app that allows users to manage collections of the things they own. Here is a [video](https://drive.google.com/file/d/1O0AY-0lq8AWu-bSShIZdy_u0z9KYdzfQ/view?usp=sharing) of how it works.
+
 
 ## 🛠 Built With <a name="built-with"></a>
 
