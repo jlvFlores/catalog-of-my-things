@@ -37,6 +37,15 @@ module Methods
     @game_manager.add_game
   end
 
+  def empty_file?(file_location)
+    File.size?(file_location).nil?
+  end
+
+  def parse_data(file)
+    json_data = File.read(file)
+    JSON.parse(json_data)
+  end
+
   def load_child_and_category(child_file, category_file)
     child_file_location = File.join(Dir.pwd, 'JSON_files', child_file)
     category_file_location = File.join(Dir.pwd, 'JSON_files', category_file)
@@ -47,6 +56,9 @@ module Methods
 
     when ['books.json', 'labels.json']
       load_book_options(child_file_location, category_file_location)
+
+    when ['games.json', 'authors.json']
+      load_game_manager(child_file_location, category_file_location)
 
     else
       puts "Couldn't find either #{child_file} or #{category_file}"
@@ -92,8 +104,20 @@ module Methods
     BookOptions.new(books, labels)
   end
 
-  def empty_file?(file_location)
-    File.size?(file_location).nil?
+  def load_game_manager(game_file_location, author_file_location)
+    return GameManager.new([], []) if empty_file?(game_file_location) || empty_file?(author_file_location)
+
+    games_data = parse_data(game_file_location)
+    authors_data = parse_data(author_file_location)
+
+    authors = authors_data.map { |author| Author.new(author['first_name'], author['last_name']) }
+
+    games = games_data.map do |game|
+      matching_author = authors.find { |author| author.first_name == game['author']['first_name'] && author.last_name == game['author']['last_name'] }
+      Game.new(matching_author, game['publish_date'], game['multiplayer'], game['last_played_at'])
+    end
+
+    GameManager.new(games, authors)
   end
 
   def save_data_to_file(data, file_name)
@@ -103,10 +127,12 @@ module Methods
   end
 
   def exit_app
-    save_data_to_file(@album_manager.music_albums, 'albums.json')
-    save_data_to_file(@album_manager.genres, 'genres.json')
     save_data_to_file(@book_options.book_instances, 'books.json')
     save_data_to_file(@book_options.labels, 'labels.json')
+    save_data_to_file(@album_manager.music_albums, 'albums.json')
+    save_data_to_file(@album_manager.genres, 'genres.json')
+    save_data_to_file(@game_manager.games, 'games.json')
+    save_data_to_file(@game_manager.authors, 'authors.json')
     puts 'Thank you for using our app'
     exit
   end

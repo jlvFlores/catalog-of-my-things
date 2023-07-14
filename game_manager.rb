@@ -16,7 +16,7 @@ class GameManager
 
   def list_games
     @games.each_with_index do |game, index|
-      puts "Game (#{index + 1}) was published on #{game.publish_date} by '#{game.author.last_name}' and last played on #{game.last_played_at}, it does #{multiplayer?(game.multiplayer)}have multiplayer/"
+      puts "Game (#{index + 1}) was published on #{game.publish_date} by '#{game.author.last_name}' and last played on #{game.last_played_at}, it does #{multiplayer?(game.multiplayer)}have multiplayer."
     end
   end
 
