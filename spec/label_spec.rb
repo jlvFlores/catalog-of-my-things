@@ -1,4 +1,4 @@
-require_relative 'label'
+require './label'
 
 describe Label do
   let(:label) { Label.new('Label 1', 'Red') }
