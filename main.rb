@@ -1,10 +1,15 @@
+require_relative 'book_options'
+require_relative 'label'
+require_relative 'methods'
+require_relative 'storage'
 require './album_manager'
-require './methods'
 
 class Main
   include Methods
+  attr_accessor :items, :labels
 
   def initialize
+    @book_options = load_child_and_category('books.json', 'labels.json')
     @album_manager = load_child_and_category('albums.json', 'genres.json')
     interface
   end
@@ -33,17 +38,27 @@ class Main
     puts "\nWelcome to the Ruby Console App!"
     puts "\nPlease choose an option from the list below:"
     puts '-------------------------------------------'
-    options_array = ['List all books', 'List all music albums', 'List all games', 'List all genres',
-                     'List all labels', 'List all authors', 'Add book', 'Add a music album', 'Add a game',
-                     'Exit']
-    options_array.each_with_index do |option, index|
-      puts "#{index + 1}. #{option}"
-    end
+    puts '1. List all books'
+    puts '2. List all music albums'
+    puts '3. List all games'
+    puts '4. List all genres'
+    puts '5. List all labels'
+    puts '6. List all authors'
+    puts '7. Add book'
+    puts '8. Add a music album'
+    puts '9. Add a game'
+    puts '10. Exit'
   end
 
   def select_option(option)
     if OPTIONS.key?(option)
-      send OPTIONS[option]
+      action = OPTIONS[option]
+      if action.is_a?(Proc)
+        action.call
+      else
+        send(action)
+      end
+      exit if option == 10 # Exit if option is 10
     else
       puts '-------------------------------------------'
       puts "\nInvalid option, try again!"
