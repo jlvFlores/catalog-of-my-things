@@ -48,7 +48,7 @@ describe Book do
 
   context '#to_hash' do
     it "returns a hash of the class's data" do
-      expected_return = { label: @label.to_hash, publisher: @publisher, cover_state: @cover_state, publish_date: Date.parse(@publish_date)}
+      expected_return = { label: @label.to_hash, publisher: @publisher, cover_state: @cover_state, publish_date: Date.parse(@publish_date) }
       expect(@book.to_hash).to eq(expected_return)
     end
   end
