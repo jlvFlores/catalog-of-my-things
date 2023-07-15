@@ -10,7 +10,7 @@ class Game < Item
   end
 
   def to_hash
-    { id: @id, publish_date: @publish_date, author: @author.to_hash, multiplayer: @multiplayer, last_played_at: @last_played_at }
+    { publish_date: @publish_date, author: @author.to_hash, multiplayer: @multiplayer, last_played_at: @last_played_at }
   end
 
   private

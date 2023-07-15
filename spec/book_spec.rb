@@ -1,11 +1,13 @@
 require './book'
+require 'date'
 
 describe Book do
   before :each do
     @label = Label.new('title', 'color')
     @publisher = 'publisher'
     @cover_state = 'cover_state'
-    @book = Book.new(@label, @publisher, @cover_state, '2022/2/3')
+    @publish_date = '2022/2/3'
+    @book = Book.new(@label, @publisher, @cover_state, @publish_date)
   end
 
   context '#new' do
@@ -41,6 +43,13 @@ describe Book do
       book = Book.new(@label, @publisher, 'good', '2021/1/1')
       book.move_to_archive
       expect(book.archived).to be_falsy # Check archived instance variable
+    end
+  end
+
+  context '#to_hash' do
+    it "returns a hash of the class's data" do
+      expected_return = { label: @label.to_hash, publisher: @publisher, cover_state: @cover_state, publish_date: Date.parse(@publish_date)}
+      expect(@book.to_hash).to eq(expected_return)
     end
   end
 end

@@ -3,7 +3,7 @@ require './label'
 
 class Book < Item
   attr_accessor :cover_state
-  attr_reader :publisher, :publish_date, :id
+  attr_reader :publisher, :publish_date
 
   def initialize(label, publisher, cover_state, publish_date)
     super(label, publish_date)
@@ -17,7 +17,6 @@ class Book < Item
 
   def to_hash
     {
-      id: @id,
       label: @label.to_hash,
       publisher: @publisher,
       cover_state: @cover_state,

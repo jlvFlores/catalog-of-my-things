@@ -13,6 +13,11 @@ describe Genre do
       genre.add_item(item)
       expect(genre.items).to eq([item])
     end
+
+    it "to_hash returns a hash of the class's data" do
+      expected_return = { name: genre.name, items: genre.items }
+      expect(genre.to_hash).to eq(expected_return)
+    end
   end
 
   context 'when receiving invalid parameters' do

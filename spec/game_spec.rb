@@ -41,4 +41,13 @@ describe Game do
       expect(game.archived).to eq(true)
     end
   end
+
+  context 'checking to_hash method' do
+    let(:game) { Game.new(author, today, multiplayer, today) }
+
+    it "returns a hash of the class's data" do
+      expected_return = { publish_date: Date.parse(today), author: author.to_hash, multiplayer: multiplayer, last_played_at: Date.parse(today) }
+      expect(game.to_hash).to eq(expected_return)
+    end
+  end
 end
