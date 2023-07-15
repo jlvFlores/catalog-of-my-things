@@ -3,12 +3,14 @@ require_relative 'label'
 require_relative 'methods'
 require './album_manager'
 require './game_manager'
+require './set_files'
 
 class Main
   include Methods
   attr_accessor :items, :labels
 
   def initialize
+    SetFiles.new
     @book_options = load_child_and_category('books.json', 'labels.json')
     @album_manager = load_child_and_category('albums.json', 'genres.json')
     @game_manager = load_child_and_category('games.json', 'authors.json')
